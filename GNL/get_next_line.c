@@ -17,8 +17,6 @@ int		get_next_line(int fd, char **line)
 	static char			*file;
 	char				*str;
 
-	if (fd <= -1)
-		return (-1);
 	str = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1));
 	ft_bzero(str, BUFF_SIZE);
 	if (file == NULL)
@@ -38,7 +36,7 @@ int		get_next_line(int fd, char **line)
 	*line = ft_strndup(file, ft_line(file), 0);
 	if (file[ft_line(file)] == '\n')
 		file = ft_short(file, ft_line(file));
-	else 
+	else
 		file = ft_short(file, ft_line(file) - 1);
 	return (1);
 }

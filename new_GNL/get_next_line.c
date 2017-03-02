@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kboucaud <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/02 14:46:20 by kboucaud          #+#    #+#             */
+/*   Updated: 2017/03/02 14:46:22 by kboucaud         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "get_next_line.h"
 
@@ -5,17 +16,12 @@ int		get_next_line(const int fd, char **line)
 {
 	static char		*tmp;
 
-	if (fd <= -1)
-		return (-1);
 	if (tmp == NULL)
 	{
 		tmp = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1));
 		ft_bzero(tmp, BUFF_SIZE);
 		if (read(fd, tmp, BUFF_SIZE) == -1)
-		{
-			free(tmp);
 			return (-1);
-		}
 	}
 	if (ft_strlen(tmp) == 0)
 		return (0);
@@ -38,8 +44,8 @@ char	*ft_end(int fd)
 	char	*str;
 
 	str = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1));
+	ft_bzero(str, BUFF_SIZE);
 	read(fd, str, BUFF_SIZE);
-	str[BUFF_SIZE] = 0;
 	if (ft_strlen(str) == 0)
 		return ("");
 	return (str);
