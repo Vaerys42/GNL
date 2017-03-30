@@ -1,41 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kboucaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/02 14:50:39 by kboucaud          #+#    #+#             */
-/*   Updated: 2017/03/02 14:50:44 by kboucaud         ###   ########.fr       */
+/*   Created: 2016/11/26 17:44:13 by kboucaud          #+#    #+#             */
+/*   Updated: 2016/11/26 17:44:14 by kboucaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include <string.h>
 #include <stdlib.h>
+#include "includes/libft.h"
 
-char	*ft_strnjoin(char const *s1, char const *s2, int size)
+t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	char	*new;
-	int		i;
-	int		j;
+	t_list		*new;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	i = ft_strlen(s1);
-	if ((new = (char*)malloc(sizeof(char) * (i + size + 1))) == NULL)
+	if (lst)
+	{
+		new = f(lst);
+		new->next = ft_lstmap(lst->next, f);
 		return (new);
-	j = 0;
-	while (s1[j] != 0)
-	{
-		new[j] = s1[j];
-		j++;
 	}
-	i = 0;
-	while (i < size)
-	{
-		new[j + i] = s2[i];
-		i++;
-	}
-	new[j + i] = 0;
-	return (new);
+	return (NULL);
 }

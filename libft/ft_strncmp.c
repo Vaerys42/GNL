@@ -1,41 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kboucaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/02 14:50:39 by kboucaud          #+#    #+#             */
-/*   Updated: 2017/03/02 14:50:44 by kboucaud         ###   ########.fr       */
+/*   Created: 2016/11/04 15:50:45 by kboucaud          #+#    #+#             */
+/*   Updated: 2016/11/19 10:07:01 by kboucaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
-#include <stdlib.h>
+#include <string.h>
 
-char	*ft_strnjoin(char const *s1, char const *s2, int size)
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	*new;
-	int		i;
-	int		j;
+	unsigned int i;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	i = ft_strlen(s1);
-	if ((new = (char*)malloc(sizeof(char) * (i + size + 1))) == NULL)
-		return (new);
-	j = 0;
-	while (s1[j] != 0)
-	{
-		new[j] = s1[j];
-		j++;
-	}
 	i = 0;
-	while (i < size)
-	{
-		new[j + i] = s2[i];
+	if (n == 0)
+		return (0);
+	while ((s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0') && i < (n - 1))
 		i++;
-	}
-	new[j + i] = 0;
-	return (new);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

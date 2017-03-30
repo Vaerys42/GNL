@@ -1,41 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kboucaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/02 14:50:39 by kboucaud          #+#    #+#             */
-/*   Updated: 2017/03/02 14:50:44 by kboucaud         ###   ########.fr       */
+/*   Created: 2016/11/04 18:26:46 by kboucaud          #+#    #+#             */
+/*   Updated: 2016/11/09 17:59:02 by kboucaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
 #include <stdlib.h>
 
-char	*ft_strnjoin(char const *s1, char const *s2, int size)
+char	*ft_strchr(const char *s, int c)
 {
-	char	*new;
 	int		i;
-	int		j;
+	char	*str;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	i = ft_strlen(s1);
-	if ((new = (char*)malloc(sizeof(char) * (i + size + 1))) == NULL)
-		return (new);
-	j = 0;
-	while (s1[j] != 0)
-	{
-		new[j] = s1[j];
-		j++;
-	}
 	i = 0;
-	while (i < size)
+	str = (char*)s;
+	while (str[i] != '\0' || c == '\0')
 	{
-		new[j + i] = s2[i];
+		if (str[i] == c)
+			return (&str[i]);
 		i++;
 	}
-	new[j + i] = 0;
-	return (new);
+	return (NULL);
 }

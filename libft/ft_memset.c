@@ -1,41 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kboucaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/02 14:50:39 by kboucaud          #+#    #+#             */
-/*   Updated: 2017/03/02 14:50:44 by kboucaud         ###   ########.fr       */
+/*   Created: 2016/11/07 16:50:50 by kboucaud          #+#    #+#             */
+/*   Updated: 2016/11/08 12:12:46 by kboucaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include <string.h>
 #include <stdlib.h>
 
-char	*ft_strnjoin(char const *s1, char const *s2, int size)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	char	*new;
-	int		i;
-	int		j;
+	unsigned int	i;
+	unsigned char	*v;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	i = ft_strlen(s1);
-	if ((new = (char*)malloc(sizeof(char) * (i + size + 1))) == NULL)
-		return (new);
-	j = 0;
-	while (s1[j] != 0)
-	{
-		new[j] = s1[j];
-		j++;
-	}
 	i = 0;
-	while (i < size)
+	v = s;
+	while (i < n)
 	{
-		new[j + i] = s2[i];
+		v[i] = c;
 		i++;
 	}
-	new[j + i] = 0;
-	return (new);
+	return (v);
 }

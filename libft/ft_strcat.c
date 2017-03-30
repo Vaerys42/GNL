@@ -1,41 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kboucaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/02 14:50:39 by kboucaud          #+#    #+#             */
-/*   Updated: 2017/03/02 14:50:44 by kboucaud         ###   ########.fr       */
+/*   Created: 2016/11/04 17:11:16 by kboucaud          #+#    #+#             */
+/*   Updated: 2016/11/13 13:27:21 by kboucaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
-#include <stdlib.h>
-
-char	*ft_strnjoin(char const *s1, char const *s2, int size)
+char	*ft_strcat(char *dest, const char *src)
 {
-	char	*new;
 	int		i;
 	int		j;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	i = ft_strlen(s1);
-	if ((new = (char*)malloc(sizeof(char) * (i + size + 1))) == NULL)
-		return (new);
+	i = 0;
 	j = 0;
-	while (s1[j] != 0)
+	while (dest[i] != '\0')
+		i++;
+	while (src[j] != '\0')
 	{
-		new[j] = s1[j];
+		dest[i] = src[j];
+		i++;
 		j++;
 	}
-	i = 0;
-	while (i < size)
-	{
-		new[j + i] = s2[i];
-		i++;
-	}
-	new[j + i] = 0;
-	return (new);
+	dest[i] = '\0';
+	return (dest);
 }

@@ -1,41 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
+/*   ft_memdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kboucaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/02 14:50:39 by kboucaud          #+#    #+#             */
-/*   Updated: 2017/03/02 14:50:44 by kboucaud         ###   ########.fr       */
+/*   Created: 2016/11/07 12:21:10 by kboucaud          #+#    #+#             */
+/*   Updated: 2016/11/07 14:20:06 by kboucaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
 #include <stdlib.h>
+#include <string.h>
 
-char	*ft_strnjoin(char const *s1, char const *s2, int size)
+void	ft_memdel(void **ap)
 {
-	char	*new;
-	int		i;
-	int		j;
-
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	i = ft_strlen(s1);
-	if ((new = (char*)malloc(sizeof(char) * (i + size + 1))) == NULL)
-		return (new);
-	j = 0;
-	while (s1[j] != 0)
-	{
-		new[j] = s1[j];
-		j++;
-	}
-	i = 0;
-	while (i < size)
-	{
-		new[j + i] = s2[i];
-		i++;
-	}
-	new[j + i] = 0;
-	return (new);
+	free(*ap);
+	*ap = NULL;
 }

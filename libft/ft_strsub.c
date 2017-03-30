@@ -1,41 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kboucaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/02 14:50:39 by kboucaud          #+#    #+#             */
-/*   Updated: 2017/03/02 14:50:44 by kboucaud         ###   ########.fr       */
+/*   Created: 2016/11/07 13:34:52 by kboucaud          #+#    #+#             */
+/*   Updated: 2016/11/13 11:00:00 by kboucaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
 #include <stdlib.h>
+#include <string.h>
 
-char	*ft_strnjoin(char const *s1, char const *s2, int size)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	char	*new;
-	int		i;
-	int		j;
+	char				*part;
+	unsigned int		i;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	i = ft_strlen(s1);
-	if ((new = (char*)malloc(sizeof(char) * (i + size + 1))) == NULL)
-		return (new);
-	j = 0;
-	while (s1[j] != 0)
-	{
-		new[j] = s1[j];
-		j++;
-	}
 	i = 0;
-	while (i < size)
+	if (s == NULL)
+		return (NULL);
+	part = (char*)malloc(sizeof(char) * (len + 1));
+	if (part == NULL)
+		return (NULL);
+	while (i < len)
 	{
-		new[j + i] = s2[i];
+		part[i] = s[start + i];
 		i++;
 	}
-	new[j + i] = 0;
-	return (new);
+	part[i] = '\0';
+	return (part);
 }

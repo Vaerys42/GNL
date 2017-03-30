@@ -1,41 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kboucaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/02 14:50:39 by kboucaud          #+#    #+#             */
-/*   Updated: 2017/03/02 14:50:44 by kboucaud         ###   ########.fr       */
+/*   Created: 2016/11/27 16:05:09 by kboucaud          #+#    #+#             */
+/*   Updated: 2016/11/27 16:05:11 by kboucaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 #include <stdlib.h>
+#include <string.h>
 
-char	*ft_strnjoin(char const *s1, char const *s2, int size)
+t_list			*ft_lstnew(void const *content, size_t content_size)
 {
-	char	*new;
-	int		i;
-	int		j;
+	t_list		*new;
 
-	if (s1 == NULL || s2 == NULL)
+	new = (t_list*)malloc(sizeof(*new));
+	if (new == NULL)
 		return (NULL);
-	i = ft_strlen(s1);
-	if ((new = (char*)malloc(sizeof(char) * (i + size + 1))) == NULL)
-		return (new);
-	j = 0;
-	while (s1[j] != 0)
+	if (content == NULL)
 	{
-		new[j] = s1[j];
-		j++;
+		new->content = NULL;
+		new->content_size = 0;
 	}
-	i = 0;
-	while (i < size)
+	else
 	{
-		new[j + i] = s2[i];
-		i++;
+		new->content = (void*)malloc(content_size);
+		if (new->content == NULL)
+		{
+			free(new);
+			return (NULL);
+		}
+		new->content = ft_memcpy(new->content, content, content_size);
+		new->content_size = content_size;
 	}
-	new[j + i] = 0;
+	new->next = NULL;
 	return (new);
 }

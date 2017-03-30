@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kboucaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/02 14:50:39 by kboucaud          #+#    #+#             */
-/*   Updated: 2017/03/02 14:50:44 by kboucaud         ###   ########.fr       */
+/*   Created: 2017/02/05 18:35:34 by kboucaud          #+#    #+#             */
+/*   Updated: 2017/02/05 18:35:34 by kboucaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
 #include <stdlib.h>
+#include "includes/libft.h"
 
-char	*ft_strnjoin(char const *s1, char const *s2, int size)
+char	*ft_strndup(char *str, int size, int start)
 {
 	char	*new;
 	int		i;
-	int		j;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	i = ft_strlen(s1);
-	if ((new = (char*)malloc(sizeof(char) * (i + size + 1))) == NULL)
-		return (new);
-	j = 0;
-	while (s1[j] != 0)
-	{
-		new[j] = s1[j];
-		j++;
-	}
 	i = 0;
+	new = (char*)malloc(sizeof(char) * (size + 1));
+	if (new == NULL)
+		return (NULL);
 	while (i < size)
 	{
-		new[j + i] = s2[i];
+		new[i] = str[start + i];
 		i++;
 	}
-	new[j + i] = 0;
+	new[i] = '\0';
 	return (new);
 }

@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kboucaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/02 14:50:39 by kboucaud          #+#    #+#             */
-/*   Updated: 2017/03/02 14:50:44 by kboucaud         ###   ########.fr       */
+/*   Created: 2016/11/04 16:38:05 by kboucaud          #+#    #+#             */
+/*   Updated: 2016/11/09 14:34:09 by kboucaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include <unistd.h>
 #include <stdlib.h>
+#include "includes/libft.h"
 
-char	*ft_strnjoin(char const *s1, char const *s2, int size)
+char	*ft_strdup(const char *src)
 {
 	char	*new;
+	int		len;
 	int		i;
-	int		j;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	i = ft_strlen(s1);
-	if ((new = (char*)malloc(sizeof(char) * (i + size + 1))) == NULL)
-		return (new);
-	j = 0;
-	while (s1[j] != 0)
-	{
-		new[j] = s1[j];
-		j++;
-	}
 	i = 0;
-	while (i < size)
+	len = ft_strlen(src);
+	new = (char*)malloc(sizeof(char) * (len + 1));
+	if (new == NULL)
 	{
-		new[j + i] = s2[i];
+		write(2, "ENOMEM", 6);
+		return (NULL);
+	}
+	while (src[i] != '\0')
+	{
+		new[i] = src[i];
 		i++;
 	}
-	new[j + i] = 0;
+	new[i] = '\0';
 	return (new);
 }

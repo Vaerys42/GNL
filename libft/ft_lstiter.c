@@ -1,41 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kboucaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/02 14:50:39 by kboucaud          #+#    #+#             */
-/*   Updated: 2017/03/02 14:50:44 by kboucaud         ###   ########.fr       */
+/*   Created: 2016/11/26 17:44:03 by kboucaud          #+#    #+#             */
+/*   Updated: 2016/11/26 17:44:05 by kboucaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include "includes/libft.h"
-#include <stdlib.h>
 
-char	*ft_strnjoin(char const *s1, char const *s2, int size)
+void		ft_lstiter(t_list *lst, void (*f)(t_list *elem))
 {
-	char	*new;
-	int		i;
-	int		j;
-
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	i = ft_strlen(s1);
-	if ((new = (char*)malloc(sizeof(char) * (i + size + 1))) == NULL)
-		return (new);
-	j = 0;
-	while (s1[j] != 0)
+	while (lst->next != NULL)
 	{
-		new[j] = s1[j];
-		j++;
+		f(lst);
+		lst = lst->next;
 	}
-	i = 0;
-	while (i < size)
-	{
-		new[j + i] = s2[i];
-		i++;
-	}
-	new[j + i] = 0;
-	return (new);
+	f(lst);
 }

@@ -1,41 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kboucaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/02 14:50:39 by kboucaud          #+#    #+#             */
-/*   Updated: 2017/03/02 14:50:44 by kboucaud         ###   ########.fr       */
+/*   Created: 2016/11/29 14:53:07 by kboucaud          #+#    #+#             */
+/*   Updated: 2016/11/29 14:53:09 by kboucaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
-#include <stdlib.h>
-
-char	*ft_strnjoin(char const *s1, char const *s2, int size)
+int		ft_sqrt(int nb)
 {
-	char	*new;
 	int		i;
-	int		j;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	i = ft_strlen(s1);
-	if ((new = (char*)malloc(sizeof(char) * (i + size + 1))) == NULL)
-		return (new);
-	j = 0;
-	while (s1[j] != 0)
-	{
-		new[j] = s1[j];
-		j++;
-	}
 	i = 0;
-	while (i < size)
+	if (nb <= 2147483647 || nb >= 0)
 	{
-		new[j + i] = s2[i];
-		i++;
+		while (i * i != nb && i < 161464936 && i * i < nb)
+			i++;
+		if (i * i == nb)
+			return (i);
 	}
-	new[j + i] = 0;
-	return (new);
+	return (0);
 }
