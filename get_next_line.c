@@ -14,33 +14,36 @@
 
 int		get_next_line(const int fd, char **line)
 {
-	static char		*tmp;
+	static char		*tmp = NULL;
 
-	*line = ft_strdup("");
 	if (tmp == NULL)
 	{
 		if ((tmp = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1))) != NULL)
 			ft_bzero(tmp, BUFF_SIZE);
 		if (tmp == NULL || (read(fd, tmp, BUFF_SIZE) == -1) || line == NULL)
+		{
+			tmp = NULL;
 			return (-1);
+		}
 	}
-	if (ft_strlen(tmp) == 0)
+	if (ft_strlen(tmp) == 0 && read(fd, tmp, BUFF_SIZE) == 0)
+	{
+		tmp = NULL;
 		return (0);
-	if (next(line, &tmp, fd) == -1)
-		return (-1);
+	}
+	next(line, &tmp, fd);
 	if (ft_strlen(tmp) != 0)
 	{
 		if ((*line = ft_strnjoin(*line, tmp, ft_line(tmp))) == NULL
 		|| (tmp = ft_short(tmp, ft_line(tmp))) == NULL)
 			return (-1);
 	}
-	if (ft_strlen(tmp) == 0)
-		tmp = read_line(fd);
 	return (tmp == NULL) ? -1 : 1;
 }
 
 int		next(char **line, char **tmp, int fd)
 {
+	*line = ft_strdup("");
 	while (tmp[0][ft_line(tmp[0])] == 0 && ft_strlen(tmp[0]) != 0)
 	{
 		if (*line == NULL)
