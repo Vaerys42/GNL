@@ -34,9 +34,8 @@ int		get_next_line(const int fd, char **line)
 	next(line, &tmp, fd);
 	if (ft_strlen(tmp) != 0)
 	{
-		if ((*line = ft_strnjoin(*line, tmp, ft_line(tmp))) == NULL
-		|| (tmp = ft_short(tmp, ft_line(tmp))) == NULL)
-			return (-1);
+		*line = ft_strnjoin(*line, tmp, ft_line(tmp));
+		tmp = ft_short(tmp, ft_line(tmp));
 	}
 	return (tmp == NULL) ? -1 : 1;
 }
