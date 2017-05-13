@@ -26,32 +26,23 @@ int		get_next_line(const int fd, char **line)
 			return (-1);
 		}
 	}
+	*line = ft_strdup("");
 	if (ft_strlen(tmp) == 0 && read(fd, tmp, BUFF_SIZE) == 0)
 	{
 		tmp = NULL;
 		return (0);
 	}
-	next(line, &tmp, fd);
+	while (tmp[ft_line(tmp)] == 0 && ft_strlen(tmp) != 0)
+	{
+		*line = ft_strjoin(*line, tmp);
+		tmp = read_line(fd);
+	}
 	if (ft_strlen(tmp) != 0)
 	{
 		*line = ft_strnjoin(*line, tmp, ft_line(tmp));
 		tmp = ft_short(tmp, ft_line(tmp));
 	}
 	return (tmp == NULL) ? -1 : 1;
-}
-
-int		next(char **line, char **tmp, int fd)
-{
-	*line = ft_strdup("");
-	while (tmp[0][ft_line(tmp[0])] == 0 && ft_strlen(tmp[0]) != 0)
-	{
-		if (*line == NULL)
-			return (-1);
-		*line = ft_strjoin(*line, tmp[0]);
-		if ((tmp[0] = read_line(fd)) == NULL)
-			return (-1);
-	}
-	return (0);
 }
 
 char	*read_line(int fd)
