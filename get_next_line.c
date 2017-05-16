@@ -12,6 +12,34 @@
 
 #include "get_next_line.h"
 
+int		ft_line(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i] != 0 && str[i] != '\n')
+		i++;
+	return (i);
+}
+
+char	*ft_short(char *str, int len)
+{
+		char	*new;
+		int		i;
+
+		if ((new = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1))) == NULL)
+			return (new);
+		i = 0;
+		ft_bzero(new, BUFF_SIZE);
+		while (len + i < BUFF_SIZE)
+		{
+			new[i] = str[len + i];
+			i++;
+		}
+		free(str);
+		return (new);
+}
+
 int		get_next_line(const int fd, char **line)
 {
 	static char		*tmp = NULL;
@@ -32,56 +60,16 @@ int		get_next_line(const int fd, char **line)
 		tmp = NULL;
 		return (0);
 	}
-	while (tmp[ft_line(tmp)] == 0 && ft_strlen(tmp) != 0)
+	while (ft_line(tmp) == (int)ft_strlen(tmp) && ft_strlen(tmp) != 0)
 	{
-		*line = ft_strjoin(*line, tmp);
-		tmp = read_line(fd);
+		*line = ft_strjoin_free(*line, tmp, 1);
+		ft_bzero(tmp, BUFF_SIZE);
+		read(fd, tmp, BUFF_SIZE);
 	}
 	if (ft_strlen(tmp) != 0)
 	{
 		*line = ft_strnjoin(*line, tmp, ft_line(tmp));
-		tmp = ft_short(tmp, ft_line(tmp));
+		tmp = ft_short(tmp, ft_line(tmp) + 1);
 	}
-	return (tmp == NULL) ? -1 : 1;
-}
-
-char	*read_line(int fd)
-{
-	char	*new;
-
-	if ((new = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1))) == NULL)
-		return (new);
-	ft_bzero(new, BUFF_SIZE);
-	read(fd, new, BUFF_SIZE);
-	return (new);
-}
-
-int		ft_line(char *str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i] != 0 && str[i] != '\n')
-		i++;
-	return (i);
-}
-
-char	*ft_short(char *str, int size)
-{
-	char	*new;
-	int		i;
-	int		len;
-
-	size++;
-	len = ft_strlen(str) - size + 1;
-	if ((new = (char*)malloc(sizeof(char) * len)) == NULL)
-		return (new);
-	i = 0;
-	while (str[size + i] != 0)
-	{
-		new[i] = str[size + i];
-		i++;
-	}
-	new[i] = 0;
-	return (new);
+	return (1);
 }

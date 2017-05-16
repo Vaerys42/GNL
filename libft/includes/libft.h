@@ -76,7 +76,7 @@ int				ft_square(int i);
 int				ft_sqrt(int i);
 int				ft_recursive_factorial(int nb);
 char			*ft_strndup(char *str, int size, int start);
-char			*ft_strnjoin(char const *s1, char const *s2, const int size);
+char			*ft_strnjoin(char *s1, char *s2, const int size);
 char			*ft_strjoin_free(char *s1, char *s2, int mode);
 
 typedef struct	s_list

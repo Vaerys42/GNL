@@ -13,7 +13,7 @@
 #include "includes/libft.h"
 #include <stdlib.h>
 
-char	*ft_strnjoin(char const *s1, char const *s2, int size)
+char	*ft_strnjoin(char *s1, char *s2, int size)
 {
 	char	*new;
 	int		i;
@@ -31,5 +31,6 @@ char	*ft_strnjoin(char const *s1, char const *s2, int size)
 	while (++i < size)
 		new[j + i] = s2[i];
 	new[j + i] = 0;
+	free(s1);
 	return (new);
 }
